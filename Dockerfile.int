@@ -1,0 +1,8 @@
+FROM ubuntu
+
+RUN apt-get update -y && apt-get install -y python3 python3-pip
+RUN pip3 install requests
+COPY dist/tagazoo-1.0.tar.gz /tmp/tagazoo-1.0.tar.gz
+RUN pip3 install /tmp/tagazoo-1.0.tar.gz
+COPY tests_int/ /tests
+CMD ["python3", "-m", "unittest", "discover", "tests"]
